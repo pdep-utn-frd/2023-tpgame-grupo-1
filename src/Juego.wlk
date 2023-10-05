@@ -2,7 +2,7 @@ import wollok.game.*
 
 object messi {
 				var puntaje = 0
-  				var property position = game.origin()
+  				var property position = game.at(8,8)
   				method image() = "messi.png"
   				method centrar() {position = game.center()}
 				method ganar(puntos){ puntaje = puntaje + puntos }
