@@ -9,6 +9,24 @@ object messi {
 				method puntaje() = puntaje
 				method perder(puntos) {puntaje = puntaje - puntos}
 }
+object mbappe{
+				const puntos = -200
+				var property position = game.at(6,6)
+				method aparecer(){game.addVisual(self)}
+				method image()="Mbappe.png"
+				method movete(){
+							  messi.ganar(puntos)
+							  self.desaparecer()
+				}
+				method desaparecer(){
+										game.removeVisual(self)
+				}
+}
+object invisible{
+					method position() = game.at(5,5)
+					method aparece(){game.removeVisual(self) mbappe.aparecer()}
+					method movete(){}
+}
 
 object paleta { const property blanco="FFFFFF"}
 object tablero{ 
