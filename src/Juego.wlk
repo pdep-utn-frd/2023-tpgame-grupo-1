@@ -10,10 +10,16 @@ object messi {
 				method perder(puntos) {puntaje = puntaje - puntos}
 }
 
+object paleta { const property blanco="FFFFFF"}
 object tablero{ 
-				method text() =  "Puntos:" + messi.puntaje()
-				method position() = game.at(10,game.height()-1)
-}				
+				method text() =  "PUNTOS:" + messi.puntaje()
+				method textColor()=paleta.blanco()
+				method position() = game.at(9,game.height()-10)
+				method movete() {}
+				method desaparece(){}
+				
+			
+			}				
 object pelotasdefutbol{ 
 						var property position = game.center()
 						var puntos = 10
