@@ -20,7 +20,7 @@ object tablero{
 				
 			
 			}				
-object pelotasdefutbol{ 
+object copa{ 
 						var property position = game.center()
 						var puntos = 10
 						method image() = "copa.png"
@@ -31,14 +31,16 @@ object pelotasdefutbol{
   							  messi.ganar(puntos)
     }
  }
-object bobo{ 
+class Segundos{ 
 						var property position = game.origin()
 						var puntos = 10
 						method image() = "bobo.png"
-						method movete() {
-    						const x = 0.randomUpTo(game.width()).truncate(0)
-    						const y = 0.randomUpTo(game.height()).truncate(0)
-  							  position = game.at(x,y) 
+						method movete() {}
+						method desaparece() {
+							game.removeVisual(self)
+							messi.perder(puntos)
+						}
+    						 
     }
  }
 object pantalla{
@@ -58,12 +60,13 @@ object pantalla{
 											game.addVisual(bobo)
 											game.addVisual(tablero)
 											game.say(messi, "Anda pa alla bobo")
-											game.onTick(2000, "movimiento", { bobo.movete() })
+											game.onTick(6000, "aparecen segundos", {game.addVisual(new Segundos(position=game.at(0.randomUpTo(game.width()).truncate(0),0.randomUpTo(game.height()).truncate(0))))})
 											}
 				method programarTeclas() {
 											//TODO: Código autogenerado }
 											}
 				method definirColisiones() {
 					game.onCollideDo(messi,{pelotasdefutbol=> pelotasdefutbol.movete()})
+					game.onCollideDo(messi,{algo=>algo.desaparece()})}
 				}	
 }
