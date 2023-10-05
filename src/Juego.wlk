@@ -86,5 +86,6 @@ object pantalla{
 				method definirColisiones() {
 					game.onCollideDo(messi,{pelotasdefutbol=> pelotasdefutbol.movete()})
 					game.onCollideDo(messi,{algo=>algo.desaparece()})}
+					game.onCollideDo(messi, {invisible =>  game.schedule(3000, { invisible.aparece()}) })
 				}	
 }
