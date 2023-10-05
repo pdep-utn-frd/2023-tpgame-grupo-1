@@ -7,24 +7,35 @@ object messi {
   				method centrar() {position = game.center()}
 				method ganar(puntos){ puntaje = puntaje + puntos }
 				method puntaje() = puntaje
+				method perder(puntos) {puntaje = puntaje - puntos}
 }
 
 object tablero{ 
 				method text() =  "Puntos:" + messi.puntaje()
 				method position() = game.at(10,game.height()-1)
-}
-class Pelotasdefutbol{  
-						var position
-						var puntos = 1 
-						method position() = position 
-						method image() = "pelota.jpg"
-						method desaparecer(){ 
-							game.removeVisual(self)
-							messi.ganar(puntos)}
+}				
+object pelotasdefutbol{ 
+						var property position = game.center()
+						var puntos = 10
+						method image() = "copa.png"
+						method movete() {
+    						const x = 0.randomUpTo(game.width()).truncate(0)
+    						const y = 0.randomUpTo(game.height()).truncate(0)
+  							  position = game.at(x,y) 
+  							  messi.ganar(puntos)
+    }
  }
-
+object bobo{ 
+						var property position = game.origin()
+						var puntos = 10
+						method image() = "bobo.png"
+						method movete() {
+    						const x = 0.randomUpTo(game.width()).truncate(0)
+    						const y = 0.randomUpTo(game.height()).truncate(0)
+  							  position = game.at(x,y) 
+    }
+ }
 object pantalla{
-				var cantAutos = 10
 				method iniciar() {
 				self.configurarInicio()
 				self.agregarVisuales()
@@ -32,15 +43,21 @@ object pantalla{
 				self.definirColisiones()}
 				method configurarInicio() {
 											game.height(10)
-											game.width(23)
-											game.title("juego MESIAS")}
+											game.width(20)
+											game.title("juego MESIAS")
+											game.boardGround("cancha.jpeg")}
 				method agregarVisuales() {
 											game.addVisualCharacter(messi)
-											cantAutos.times({
-											i => game.addVisual(new Pelotasdefutbol(position = game.at(i+3,10)))})
-											game.addVisual(tablero)}
+											game.addVisual(pelotasdefutbol)
+											game.addVisual(bobo)
+											game.addVisual(tablero)
+											game.say(messi, "Anda pa alla bobo")
+											game.onTick(2000, "movimiento", { bobo.movete() })
+											}
 				method programarTeclas() {
 											//TODO: Código autogenerado }
 											}
-				method definirColisiones() {game.onCollideDo(messi,{algo => algo.desaparecer() }) }	
+				method definirColisiones() {
+					game.onCollideDo(messi,{pelotasdefutbol=> pelotasdefutbol.movete()})
+				}	
 }
