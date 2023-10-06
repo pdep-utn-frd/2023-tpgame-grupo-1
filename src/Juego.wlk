@@ -8,6 +8,19 @@ object messi {
 				method ganar(puntos){ puntaje = puntaje + puntos }
 				method puntaje() = puntaje
 				method perder(puntos) {puntaje = puntaje - puntos}
+				method fin(){
+					puntaje >100 
+					game.say(messi,"dale campeon!")
+					game.boardGround("campeones.jpeg")
+					
+					
+				}
+}
+object muchachos {
+	
+	method play(){
+		game.sound("muchachos.mp3").play()
+	}
 }
 object mbappe{
 				const puntos = -200
@@ -52,7 +65,7 @@ object copa{
 class Segundos{ 
 						var property position = game.origin()
 						var puntos = 10
-						method image() = "bobo.png"
+						method image() = "mbappe.png"
 						method movete() {}
 						method desaparece() {
 							game.removeVisual(self)
@@ -60,7 +73,7 @@ class Segundos{
 						}
     						 
     }
- }
+ 
 object pantalla{
 				method iniciar() {
 				self.configurarInicio()
@@ -74,18 +87,20 @@ object pantalla{
 											game.boardGround("cancha.jpeg")}
 				method agregarVisuales() {
 											game.addVisualCharacter(messi)
-											game.addVisual(pelotasdefutbol)
-											game.addVisual(bobo)
+											game.addVisual(copa)
 											game.addVisual(tablero)
 											game.say(messi, "Anda pa alla bobo")
 											game.onTick(6000, "aparecen segundos", {game.addVisual(new Segundos(position=game.at(0.randomUpTo(game.width()).truncate(0),0.randomUpTo(game.height()).truncate(0))))})
+											
 											}
+											
+											
 				method programarTeclas() {
 											//TODO: Código autogenerado }
 											}
 				method definirColisiones() {
 					game.onCollideDo(messi,{pelotasdefutbol=> pelotasdefutbol.movete()})
-					game.onCollideDo(messi,{algo=>algo.desaparece()})}
+					game.onCollideDo(messi,{algo=>algo.desaparece()})
 					game.onCollideDo(messi, {invisible =>  game.schedule(3000, { invisible.aparece()}) })
 				}	
 }
