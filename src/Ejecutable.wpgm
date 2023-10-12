@@ -1,0 +1,51 @@
+import wollok.game.*
+import Juego.*
+
+program pacman{
+
+	
+	//Dimensiones
+	game.width(14)
+	game.height(8)
+	game.cellSize(50)
+	
+	//Fondo
+	game.boardGround("fondo.jpg")
+	
+	game.addVisualCharacter(pacman)
+	game.addVisual(fantasma)
+	game.addVisual(fantasma2)
+	game.addVisual(puntaje)
+	
+	//Acciones
+	
+	//Fantasma Rojo
+	game.whenCollideDo(fantasma,{
+		personaje => personaje.chocarConRival(fantasma)
+		if(personaje.vidas() == 0){
+			finDeJuego.terminar()
+			game.boardGround("gameOver.png")
+		}
+	})
+	
+	game.onTick(1.randomUpTo(5) * 300, "movimiento", {
+			fantasma.acercarseA_(pacman)
+		})
+	
+	//Fantasma Azul	
+	game.whenCollideDo(fantasma2,{
+		personaje => personaje.chocarConRival(fantasma)
+		if(personaje.vidas() == 0){
+			finDeJuego.terminar()
+			game.boardGround("gameOver.png")
+		}
+	})
+	
+	game.onTick(1.randomUpTo(5) * 800, "movimiento", {
+			fantasma2.acercarseA_(pacman)
+		})
+	
+	
+	game.start()
+
+}
