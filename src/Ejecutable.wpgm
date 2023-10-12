@@ -16,9 +16,6 @@ program pacman{
 	game.addVisual(fantasma2)
 	game.addVisual(puntaje)
 	game.addVisual(vidaGrafico)
-	
-	//Acciones
-	
 	//Fantasma Rojo
 	game.whenCollideDo(fantasma,{
 		personaje => personaje.chocarConRival(fantasma)
@@ -43,5 +40,17 @@ program pacman{
 	game.onTick(1.randomUpTo(5) * 800, "movimiento", {
 			fantasma2.acercarseA_(pacman)
 		})
+	
+	//
+	
+
+	
+	
+	game.onTick(6000,"aparece fruta",{game.addVisual(new Fruta(position=game.at(0.randomUpTo(game.width()).truncate(0),0.randomUpTo(game.height()).truncate(0))))})
+		//20.times(game.addVisual(new Pelota(position=game.at(ancho,alto))))
+	
+	
+	
+	//game.onTick(1 , "muro", {game.addVisual(new Muro(position(3,4)))})
 	game.start()
 }
