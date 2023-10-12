@@ -22,7 +22,7 @@ program pacman{
 	//Fantasma Rojo
 	game.whenCollideDo(fantasma,{
 		personaje => personaje.chocarConRival(fantasma)
-		if(personaje.vidas() == 0){
+		if(pacman.vidas() == 0){
 			finDeJuego.terminar()
 			game.addVisual(finDeJuego)
 			game.addVisual(puntajeFinal)
@@ -34,7 +34,7 @@ program pacman{
 	//Fantasma Azul	
 	game.whenCollideDo(fantasma2,{
 		personaje => personaje.chocarConRival(fantasma)
-		if(personaje.vidas() == 0){
+		if(pacman.vidas() == 0){
 			finDeJuego.terminar()
 			game.addVisual(finDeJuego)
 			game.addVisual(puntajeFinal)
