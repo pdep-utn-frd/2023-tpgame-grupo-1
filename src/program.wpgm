@@ -1,7 +1,0 @@
-import wollok.game.*
-import example.*
-program ejemplo {
-				keyboard.enter().onPressDo({muchachos.play()})
-  				pantalla.iniciar()
-   				game.start()
-}
