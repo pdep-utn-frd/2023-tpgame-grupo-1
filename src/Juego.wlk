@@ -11,7 +11,9 @@ object pacman {
 		vidas = vidas - 1
 		position = game.origin()
 	}
-	
+	method ganarPuntosFruta(){
+		puntos = puntos +10
+	}
 	method chocarConRival(rival){
 		self.perderVida()
 		rival.position(game.at(5,5))
@@ -90,21 +92,24 @@ object finDeJuego{
 }
 
 class Fruta{ 
-	var property imagen = "cherry.png"
+	const cherry = "cherry.png"
+	const banana = "banana.png"
+	const sandia = "sandia.png"
 	var property position=game.origin()
 	var property x=0
+	var property image= self.imagen()
 	
 	method desaparecer(){
 		game.removeVisual(self)
 	}
-	method image(){
-		x = 1.randomUpTo(3).roundUp()
+	method imagen(){
+		x = 0.randomUpTo(3).roundUp()
 		if (x==1){
-			 return "cherry.png"
+			 return cherry
 		}else if(x==2){
-			return "banana.png"
+			return banana
 		}else{
-			return "sandia.png"
+			return sandia
 		}	
 	}
 	
