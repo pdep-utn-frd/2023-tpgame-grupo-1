@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object pacman {
-
+	var property ganador = 20
 	var property image = "pacman.png"
 	var property position = game.origin()
 	var property vidas = 2
@@ -11,14 +11,18 @@ object pacman {
 		vidas = vidas - 1
 		position = game.origin()
 	}
-	method ganarPuntosFruta(){
-		puntos = puntos +10
-	}
+	method ganapuntos(p){
+		puntos=puntos+p
+		finalDeJuego.finJuego()}
 	method chocarConRival(rival){
 		self.perderVida()
 		rival.position(game.at(5,5))
 	}
 	
+}
+
+object similarPacman{var property image = "pacman.png"
+					var property position = pacman.position()
 }
 
 object fantasma{
@@ -129,9 +133,10 @@ class Pelota{
 	}
 }
 
-//class Muro{
-//			method image()="muro.jpg"
-//			method position(x,y)= game.at(x,y)
-//			
-//}
+
+object tableroFinal{
+	var property position = game.at(0,0)
+	var property image = "PantallaFinal.png"
+}
+
 
