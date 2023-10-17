@@ -1,5 +1,5 @@
 import wollok.game.*
-
+import general.*
 object pacman {
 	var property ganador = 20
 	var property image = "pacman.png"
