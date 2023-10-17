@@ -1,65 +1,6 @@
 import wollok.game.*
 import Juego.*
+import general.*
 
-program pacman{
-	
-	//Dimensiones
-	game.width(18)
-	game.height(10)
-	game.cellSize(50)
-	
-	//Fondo
-	game.boardGround("fondo.jpg")
-	//Visuales
-	game.addVisualCharacter(pacman)
-	game.addVisual(fantasma)
-	game.addVisual(fantasma2)
-	game.addVisual(puntaje)
-	game.addVisual(vidaGrafico)
-	//Fantasma Rojo
-	game.whenCollideDo(fantasma,{
-		personaje => personaje.chocarConRival(fantasma)
-		if(pacman.vidas() == 0){
-			finDeJuego.terminar()
-			game.addVisual(finDeJuego)
-			game.addVisual(puntajeFinal)
-		}
-	})
-	game.onTick(1.randomUpTo(5) * 300, "movimiento", {
-			fantasma.acercarseA_(pacman)
-		})
-	//Fantasma Azul	
-	game.whenCollideDo(fantasma2,{
-		personaje => personaje.chocarConRival(fantasma)
-		if(pacman.vidas() == 0){
-			finDeJuego.terminar()
-			game.addVisual(finDeJuego)
-			game.addVisual(puntajeFinal)
-		}
-	})
-	game.onTick(1.randomUpTo(5) * 800, "movimiento", {
-			fantasma2.acercarseA_(pacman)
-		})
-	game.whenCollideDo(Fruta,{
-		personaje => personaje.chocarConRival(fantasma)
-		if(pacman.vidas() == 0){
-			finDeJuego.terminar()
-			game.addVisual(finDeJuego)
-			game.addVisual(puntajeFinal)
-		}
-	})
-	//
-	
-
-	
-	
-	game.onTick(6000,"aparece fruta",{game.addVisual
-		(new Fruta(position=game.at(0.randomUpTo(game.width()).truncate(0),
-			0.randomUpTo(game.height()).truncate(0))))})
-		//20.times(game.addVisual(new Pelota(position=game.at(ancho,alto))))
-	
-	
-	
-	//game.onTick(1 , "muro", {game.addVisual(new Muro(position(3,4)))})
-	game.start()
+program pacman{ lanzar.iniciar()
 }
