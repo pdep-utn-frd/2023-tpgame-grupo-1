@@ -2,10 +2,10 @@ import wollok.game.*
 import general.*
 
 object pacman {
-	var property ganador = 20
+	var property ganador = 5000
 	var property image = "pacman.png"
 	var property position = game.origin()
-	var property vidas = 2
+	var property vidas = 3
 	var property puntos = 0
 	
 	method perderVida(){
@@ -15,7 +15,8 @@ object pacman {
 	method ganaVida(){vidas=vidas+1}
 	method ganapuntos(p){
 		puntos=puntos+p
-		finalDeJuego.finJuego()}
+		if (puntos > 5000){finalDeJuego.finJuego()}
+		}
 	method chocarConRival(rival){
 		self.perderVida()
 		rival.position(game.at(5,5))
@@ -24,14 +25,14 @@ object pacman {
 		puntos=puntos-50
 		position=game.at(0,0)}
 	
-	method desaparecer(){}
+	method desaparece(){}
 }
 
 object similarPacman{var property image = "pacman.png"
 					var property position = pacman.position()
 					method chocarConRival(rival){}
 					method vidas(){}
-					method desaparecer(){}
+					method desaparece(){}
 					method quitarpuntos(){}
 }
 
@@ -64,7 +65,7 @@ object fantasma2{
 	}
 	method chocarConRival(rival){}
 	method vidas(){}
-	method desaparecer(){}
+	method desaparece(){}
 	method quitarpuntos(){}
 }
 
@@ -78,7 +79,7 @@ object vidaGrafico{
 				method position() = game.at(16,9)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}
-				method desaparecer(){}	
+				method desaparece(){}	
 				method quitarpuntos(){}	
 }
 object puntaje{
@@ -88,7 +89,7 @@ object puntaje{
 				method position() = game.at(16,8)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}	
-				method desaparecer(){}
+				method desaparece(){}
 				method quitarpuntos(){}	
 }
 object puntajeFinal{
@@ -98,7 +99,7 @@ object puntajeFinal{
 				method position() = game.at(9,0)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}
-				method desaparecer(){}				
+				method desaparece(){}					
 }
 
 class Fruta{ 
@@ -126,8 +127,6 @@ class Fruta{
 	method chocarConRival(rival){}
 	method quitarpuntos(){}
 }
-	
-}
 class Pelotita{ 
 	var property image="pelita.png"
 	 var property position = game.origin()
@@ -148,6 +147,7 @@ class Bonus inherits Pelotita {
 object tableroFinal{
 	var property position = game.at(2,1)
 	var property image = "pantallaganador2.jpeg"
+	method desaparece(){}
 }
 class Muro{ 
 
@@ -176,5 +176,3 @@ object superBonus {
 	
 	method quitarpuntos(){}
 }
-}
-
