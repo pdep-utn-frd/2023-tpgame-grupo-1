@@ -18,7 +18,7 @@ object pacman {
 		self.perderVida()
 		rival.position(game.at(5,5))
 	}
-	
+	method desaparecer(){}
 }
 
 object similarPacman{var property image = "pacman.png"
@@ -38,6 +38,7 @@ object fantasma{
 	}
 	method chocarConRival(rival){}
 	method vidas(){}
+	method desaparecer(){}
 }
 object fantasma2{
 	var property image = "rival2.png"
@@ -52,6 +53,7 @@ object fantasma2{
 	}
 	method chocarConRival(rival){}
 	method vidas(){}
+	method desaparecer(){}
 }
 
 //Visual para puntaje 
@@ -63,7 +65,8 @@ object vidaGrafico{
 				method text()="VIDAS:" + pacman.vidas()
 				method position() = game.at(16,9)
 				method acercarseA_(personaje){}
-				method chocarConRival(rival){}				
+				method chocarConRival(rival){}	
+				method desaparecer(){}
 }
 object puntaje{
 				const property blanco="FFFFFF"
@@ -72,6 +75,7 @@ object puntaje{
 				method position() = game.at(16,8)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}				
+				method desaparecer(){}
 }
 object puntajeFinal{
 				const property blanco="FFFFFF"
@@ -79,20 +83,8 @@ object puntajeFinal{
 				method text()="PUNTOS:" + pacman.puntos()
 				method position() = game.at(9,0)
 				method acercarseA_(personaje){}
-				method chocarConRival(rival){}				
-}
-//Visual para terminar el juego 
-
-object finDeJuego{
-				  method terminar(){
-				  					game.removeVisual(fantasma)
-				  					game.removeVisual(fantasma2)
-				  					game.removeVisual(pacman)
-				  					game.removeVisual(puntaje)
-				  					game.removeVisual(vidaGrafico)
-				  }
-				  method image()= "gameOver.png"
-				  method position()= game.at(1,0)
+				method chocarConRival(rival){}	
+				method desaparecer(){}
 }
 
 class Fruta{ 
@@ -105,6 +97,7 @@ class Fruta{
 	
 	method desaparecer(){
 		game.removeVisual(self)
+		pacman.ganapuntos(20)
 	}
 	method imagen(){
 		x = 0.randomUpTo(3).roundUp()
@@ -135,7 +128,7 @@ class Pelota{
 
 
 object tableroFinal{
-	var property position = game.at(0,0)
+	var property position = game.at(2,1)
 	var property image = "PantallaFinal.png"
 }
 
