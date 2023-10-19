@@ -2,6 +2,8 @@ import wollok.game.*
 import Juego.*
 
 object lanzar{
+				const x= 0.randomUpTo(5).roundUp()
+				const y=0.randomUpTo(10).roundUp()
 				const musica = game.sound("Pacman.mp3")
 				var property momentanea
 				var pause= false
@@ -21,11 +23,15 @@ object lanzar{
 												else {musica.stop()}}
 				method agregarVisuales(){
 										game.boardGround("Fondo.png")	
+										game.addVisual(puntaje)
+										game.addVisual(vidaGrafico)}
+										4.times({i=>game.addVisual(new Muro(image="muro1.png",position=game.at(i*4,1+i)))})
+										4.times({i=>game.addVisual(new Muro(image="muro2.png",position=game.at(i*4,2+i)))})
+										4.times({i=>game.addVisual(new Muro(image="muro3.png",position=game.at(i*4,3+i)))})
 										game.addVisualCharacter(pacman)
 										game.addVisual(fantasma)
 										game.addVisual(fantasma2)
-										game.addVisual(puntaje)
-										game.addVisual(vidaGrafico)}
+										
 				method pausa(){if (pause == false){game.removeTickEvent("aparece fruta")
 													game.removeTickEvent("movimiento1")
 													game.removeTickEvent("movimiento")
@@ -62,11 +68,19 @@ object lanzar{
 																					game.addVisual(finPorDerrota)
 																					game.addVisual(puntajeFinal)}})
 										game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA_(pacman)})
-										game.onTick(6000,"aparece fruta",{game.addVisual
-											(new Fruta(position=game.at(0.randomUpTo(game.width()).truncate(0),
-											0.randomUpTo(game.height()).truncate(0))))})
+										//FRUTAS
+											game.onTick(6000,"aparece fruta",{game.addVisual
+											(new Fruta(position=game.at(x,y)))})
 										game.onCollideDo(pacman,{algo=>algo.desaparece()})}
 										}
+										//MUROS
+										
+										game.whenCollideDo(pacman,{algo=>algo.quitarpuntos()})
+										
+										//PARA LOS BONUS
+										game.onTick(15000,"aparecen bonus",{game.addVisual(new Bonus(image="bonus.png",position=game.at(x,y)))})
+										game.onTick(30000,"aparece superBonus",{game.addVisual(superBonus)})
+	
 				
 object finalDeJuego{
 				const musicaGanador =game.sound("PacmanVictoria.mp3")					
