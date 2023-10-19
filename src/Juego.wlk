@@ -29,6 +29,10 @@ object pacman {
 
 object similarPacman{var property image = "pacman.png"
 					var property position = pacman.position()
+					method chocarConRival(rival){}
+					method vidas(){}
+					method desaparecer(){}
+					method quitarpuntos(){}
 }
 
 object fantasma{
@@ -45,6 +49,7 @@ object fantasma{
 	method chocarConRival(rival){}
 	method vidas(){}
 	method desaparecer(){}
+	method quitarpuntos(){}
 }
 object fantasma2{
 	var property image = "rival2.png"
@@ -60,6 +65,7 @@ object fantasma2{
 	method chocarConRival(rival){}
 	method vidas(){}
 	method desaparecer(){}
+	method quitarpuntos(){}
 }
 
 //Visual para puntaje 
@@ -72,7 +78,8 @@ object vidaGrafico{
 				method position() = game.at(16,9)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}
-				method desaparecer(){}				
+				method desaparecer(){}	
+				method quitarpuntos(){}	
 }
 object puntaje{
 				const property blanco="FFFFFF"
@@ -81,7 +88,8 @@ object puntaje{
 				method position() = game.at(16,8)
 				method acercarseA_(personaje){}
 				method chocarConRival(rival){}	
-				method desaparecer(){}			
+				method desaparecer(){}
+				method quitarpuntos(){}	
 }
 object puntajeFinal{
 				const property blanco="FFFFFF"
@@ -115,25 +123,58 @@ class Fruta{
 			return sandia
 		}	
 	}
+	method chocarConRival(rival){}
+	method quitarpuntos(){}
+}
 	
 }
-
-class Pelota{ 
-	var property image ="pelotitas.png"
-	var property position= game.origin()
-	
-	const x=0.randomUpTo(18)
-	const y=0.randomUptTo(10)
-	method desaparecer() {
+class Pelotita{ 
+	var property image="pelita.png"
+	 var property position = game.origin()
+	method desaparece() {
 		game.removeVisual(self)
+		pacman.ganapuntos(10)
 	}
-	method aparecer(){
-		20.times(game.addVisual(new Pelota(position=game.at(x,y))))
-	}
+	method chocarConRival(rival){}	
+	method quitarpuntos(){}
+	
 }
+class Bonus inherits Pelotita { 
+	override method desaparece(){
+		super()
+		pacman.ganaVida()}}
+	
 
 object tableroFinal{
 	var property position = game.at(2,1)
 	var property image = "pantallaganador2.jpeg"
+}
+class Muro{ 
+
+	
+	var property image=" "
+	var property position = 0
+	method quitarpuntos () { 
+		pacman.pierdepuntos()
+		
+	}
+	method chocarConRival(rival){}
+	method desaparece(){}
+}
+object superBonus {
+	const x= 0.randomUpTo(5).roundUp()
+	const y=0.randomUpTo(10).roundUp()
+	var property image= "key.png"
+	var property position=game.at(x,y)
+	method desaparece(){
+		game.say(pacman,"¡¡+3000!!!")
+		game.removeVisual(self)
+		pacman.ganapuntos(3000)
+	}
+	method chocarConRival(rival){}
+	method vidas(){}
+	
+	method quitarpuntos(){}
+}
 }
 
