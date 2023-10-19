@@ -12,6 +12,7 @@ object pacman {
 		vidas = vidas - 1
 		position = game.origin()
 	}
+	method ganaVida(){vidas=vidas+1}
 	method ganapuntos(p){
 		puntos=puntos+p
 		finalDeJuego.finJuego()}
@@ -19,6 +20,10 @@ object pacman {
 		self.perderVida()
 		rival.position(game.at(5,5))
 	}
+	method pierdepuntos(){ 
+		puntos=puntos-50
+		position=game.at(0,0)}
+	
 	method desaparecer(){}
 }
 
