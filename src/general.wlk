@@ -10,6 +10,7 @@ object lanzar{
 				method iniciar(){
 								self.configurarInicio()
 								self.agregarVisuales()
+								self.agregarVisuales2()
 								self.programarTeclas()
 								self.agregarColisiones()
 								self.agregarMusica(true)
@@ -25,6 +26,7 @@ object lanzar{
 										game.boardGround("Fondo.png")	
 										game.addVisual(puntaje)
 										game.addVisual(vidaGrafico)}
+										10.times{j=>35.times({i=>game.addVisual(new Pelotita(position =game.at(i-2,j)))})}
 										4.times({i=>game.addVisual(new Muro(image="muro1.png",position=game.at(i*4,1+i)))})
 										4.times({i=>game.addVisual(new Muro(image="muro2.png",position=game.at(i*4,2+i)))})
 										4.times({i=>game.addVisual(new Muro(image="muro3.png",position=game.at(i*4,3+i)))})
