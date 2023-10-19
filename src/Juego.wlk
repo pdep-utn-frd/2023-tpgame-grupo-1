@@ -1,5 +1,6 @@
 import wollok.game.*
 import general.*
+
 object pacman {
 	var property ganador = 20
 	var property image = "pacman.png"
@@ -65,8 +66,8 @@ object vidaGrafico{
 				method text()="VIDAS:" + pacman.vidas()
 				method position() = game.at(16,9)
 				method acercarseA_(personaje){}
-				method chocarConRival(rival){}	
-				method desaparecer(){}
+				method chocarConRival(rival){}
+				method desaparecer(){}				
 }
 object puntaje{
 				const property blanco="FFFFFF"
@@ -74,8 +75,8 @@ object puntaje{
 				method text()="PUNTOS:" + pacman.puntos()
 				method position() = game.at(16,8)
 				method acercarseA_(personaje){}
-				method chocarConRival(rival){}				
-				method desaparecer(){}
+				method chocarConRival(rival){}	
+				method desaparecer(){}			
 }
 object puntajeFinal{
 				const property blanco="FFFFFF"
@@ -83,8 +84,8 @@ object puntajeFinal{
 				method text()="PUNTOS:" + pacman.puntos()
 				method position() = game.at(9,0)
 				method acercarseA_(personaje){}
-				method chocarConRival(rival){}	
-				method desaparecer(){}
+				method chocarConRival(rival){}
+				method desaparecer(){}				
 }
 
 class Fruta{ 
@@ -95,7 +96,7 @@ class Fruta{
 	var property x=0
 	var property image= self.imagen()
 	
-	method desaparecer(){
+	method desaparece(){
 		game.removeVisual(self)
 		pacman.ganapuntos(20)
 	}
@@ -126,10 +127,8 @@ class Pelota{
 	}
 }
 
-
 object tableroFinal{
 	var property position = game.at(2,1)
-	var property image = "PantallaFinal.png"
+	var property image = "pantallaganador2.jpeg"
 }
-
 
