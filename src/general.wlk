@@ -2,13 +2,14 @@ import wollok.game.*
 import Juego.*
 
 object lanzar{
-				var x= 0.randomUpTo(5).roundUp()
-				var y=0.randomUpTo(10).roundUp()
-				var xx= 0.randomUpTo(5).roundUp()
-				var yy=0.randomUpTo(10).roundUp()
 				const musica = game.sound("Pacman.mp3")
+				const fantasma=new Fantasma()
+				const fantasma2=new Fantasma(position=game.at(7,4),image="rival2.png")
 				var property momentanea
 				var pause = false
+				const vidaGrafico= new Vidas(position=game.at(16,9))
+				const puntaje= new Puntajes(position=game.at(16,8))
+				const puntajeFinal = new Puntajes(position=game.at(9,0))
 				method iniciar(){
 								self.configurarInicio()
 								self.agregarVisuales()
@@ -58,6 +59,7 @@ object lanzar{
 										keyboard.space().onPressDo({self.pausa()})
 										keyboard.p().onPressDo({musica.stop()})
 				}
+				method posicion(){return 0.randomUpTo(10)}
 				method agregarColisiones(){
 										//Fantasma Rojo
 										game.whenCollideDo(fantasma,{personaje => personaje.chocarConRival(fantasma)
@@ -72,8 +74,7 @@ object lanzar{
 																					game.addVisual(puntajeFinal)}})
 										game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA_(pacman)})
 										//FRUTAS
-											game.onTick(6000,"aparece fruta",{game.addVisual
-											(new Fruta(position=game.at(x,y)))})
+											game.onTick(8000,"aparece fruta",{game.addVisual(new Fruta(position=game.at(self.posicion(),self.posicion())))})
 										game.onCollideDo(pacman,{algo=>algo.desaparece()})
 										
 										//MUROS
@@ -81,44 +82,7 @@ object lanzar{
 										game.whenCollideDo(pacman,{algo=>algo.quitarpuntos()})
 										
 										//PARA LOS BONUS
-										game.onTick(15000,"aparecen bonus",{game.addVisual(new Bonus(image="bonus.png",position=game.at(xx,yy)))
-										})
-										game.onTick(30000,"aparece superBonus",{game.addVisual(superBonus)})}
-										
+										game.onTick(15000,"aparecen bonus",{game.addVisual(new Bonus(image="bonus.png",position=game.at(self.posicion(),self.posicion())))})
+										game.onTick(30000,"aparece superBonus",{game.addVisual(new SuperBonus(image="key.png",position=game.at(self.posicion(),self.posicion())))})
 										}
-	
-				
-object finalDeJuego{
-				const musicaGanador =game.sound("PacmanVictoria.mp3")					
-				method finJuego(){
-								game.removeVisual(pacman)
-								game.removeVisual(fantasma)
-								game.removeVisual(fantasma2)
-								game.removeVisual(puntaje)
-								game.removeVisual(vidaGrafico)
-								game.addVisual(tableroFinal)
-								game.removeTickEvent("aparece fruta")
-								game.removeTickEvent("movimiento1")
-								game.removeTickEvent("movimiento")
-								lanzar.agregarMusica(false)
-								game.schedule(500, {musicaGanador.play()})}
-}
-
-object finPorDerrota{
-				  const musicaPerdedor =game.sound("PacmanDerrota.mp3")
-				  method terminar(){
-				  					game.removeVisual(fantasma)
-				  					game.removeVisual(fantasma2)
-				  					game.removeVisual(pacman)
-				  					game.removeVisual(puntaje)
-				  					game.removeVisual(vidaGrafico)
-				  					lanzar.agregarMusica(false)
-									game.schedule(500, {musicaPerdedor.play()})
-									game.removeTickEvent("aparece fruta")
-									game.removeTickEvent("movimiento1")
-									game.removeTickEvent("movimiento")
-				  }
-				  method image()= "gamerOver.jpeg"
-				  method position()= game.at(3,1)
-}
-				
+										}
