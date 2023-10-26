@@ -48,8 +48,8 @@ object lanzar{
 													game.onTick(6000,"aparece fruta",{game.addVisual
 													(new Fruta(position=game.at(0.randomUpTo(game.width()).truncate(0),
 													0.randomUpTo(game.height()).truncate(0))))})
-													game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA_(pacman)})
-													game.onTick(1.randomUpTo(5) * 300, "movimiento1", {fantasma.acercarseA_(pacman)})
+													game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA()})
+													game.onTick(1.randomUpTo(5) * 300, "movimiento1", {fantasma.acercarseA()})
 													pause = false
 													game.removeVisual(similarPacman)
 													game.addVisual(pacman)
@@ -66,13 +66,13 @@ object lanzar{
 															if((pacman.vidas()==0)|| (pacman.puntos()<0)){finPorDerrota.terminar()
 																					game.addVisual(finPorDerrota)
 																					game.addVisual(puntajeFinal)}})
-										game.onTick(1.randomUpTo(5) * 300, "movimiento1", {fantasma.acercarseA_(pacman)})
+										game.onTick(1.randomUpTo(5) * 300, "movimiento1", {fantasma.acercarseA()})
 										//Fantasma Azul	
 										game.whenCollideDo(fantasma2,{personaje => personaje.chocarConRival(fantasma)
 															if((pacman.vidas()==0) || (pacman.puntos()<0)){finPorDerrota.terminar()
 																					game.addVisual(finPorDerrota)
 																					game.addVisual(puntajeFinal)}})
-										game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA_(pacman)})
+										game.onTick(1.randomUpTo(5) * 800, "movimiento", {fantasma2.acercarseA()})
 										//FRUTAS
 											game.onTick(8000,"aparece fruta",{game.addVisual(new Fruta(position=game.at(self.posicion(),self.posicion())))})
 										game.onCollideDo(pacman,{algo=>algo.desaparece()})
