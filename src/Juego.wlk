@@ -43,11 +43,9 @@ class Fantasma{
 	var property image = "rival1.png"
 	var property position = game.at(5,2)
 	
-	method acercarseA_(personaje){
-		var posicionPacman = personaje.position()
-		var newX = position.x() + if(posicionPacman.x() > position.x()) {1} else {-1}
-		var newY = position.y() + if(posicionPacman.y() > position.y()) {1} else {-1}
-		
+	method acercarseA(){
+		var newX = position.x() + if(pacman.position().x() > position.x()) {1} else {-1}
+		var newY = position.y() + if(pacman.position().y() > position.y()) {1} else {-1}
 		position = game.at(newX, newY)
 	}
 	method chocarConRival(rival){}
@@ -109,7 +107,6 @@ class Muro{
 	method desaparece(){}
 }
 class SuperBonus inherits Pelotita {
-
 	override method desaparece(){
 		game.say(pacman,"¡¡+3000!!!")
 		game.removeVisual(self)
