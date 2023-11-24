@@ -1,0 +1,7 @@
+import wollok.game.*
+import Juego.*
+import general.*
+
+ program pacman{nivel1.iniciar()}
+ 
+ 
